@@ -1,13 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { useEffect } from 'react';
+import * as Location from 'expo-location';
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+   useEffect(() => {
+    (async () => {
+      // Esto verifica que los permisos que pusimos en el app.json funcionan
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      console.log("Estado del permiso:", status);
+    })();
+  }, []);
 }
 
 const styles = StyleSheet.create({
